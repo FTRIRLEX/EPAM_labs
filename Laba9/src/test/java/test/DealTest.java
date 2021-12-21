@@ -23,7 +23,7 @@ public class DealTest {
     @BeforeMethod
     public void browserSetup() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("start-maximized");
+        options.addArguments("--start-maximized");
         driver = new ChromeDriver(options);
         String email = "Egorka002";
         String password = "30132805Egor";
