@@ -3,8 +3,6 @@ package test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -21,19 +19,11 @@ public class DealTest {
     public String countAfterChanges;
     public Boolean ordersAfterChanges;
 
-
-    public WebDriver getDriver() {
-                    WebDriverManager.firefoxdriver().setup();
-                    driver = new FirefoxDriver();
-            driver.manage().window().maximize();
-
-        return driver;
-    }
     @BeforeMethod
     public void browserSetup() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("window-size=1920,1080");
-        driver = getDriver();
+        driver = new ChromeDriver(options);
         String email = "Egorka002";
         String password = "30132805Egor";
         fxProTradingPage = new StartPage(driver)
