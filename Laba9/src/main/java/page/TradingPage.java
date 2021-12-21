@@ -17,7 +17,7 @@ public class TradingPage extends BasePage{
     private WebElement selectBuy;
     @FindBy(xpath = "/html/body/div[2]/div[1]/nav/div[1]/div/div[3]/div/div/div[2]/div[2]/div[1]/div/div/section/button")
     private WebElement placeDeal;
-    @FindBy(xpath = "//*[@id=\"ember28\"]/div[2]/ul/li[13]/div")
+    @FindBy(xpath = "/html/body/div[2]/div[1]/nav/div[2]/ul/li[13]/div")
     private WebElement countOfPositions;
     @FindBy(xpath = "/html/body/div[2]/div[1]/nav/div[1]/div/div[3]/div/div/div[2]/section/div[1]")
     private WebElement selectSell;
