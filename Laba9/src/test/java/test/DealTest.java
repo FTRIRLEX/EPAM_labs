@@ -24,9 +24,9 @@ public class DealTest {
 
     public WebDriver getDriver() {
                     WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver();
+                    driver = new FirefoxDriver();
             driver.manage().window().maximize();
-        
+
         return driver;
     }
     @BeforeMethod
