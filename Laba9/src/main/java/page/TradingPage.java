@@ -13,13 +13,13 @@ public class TradingPage extends BasePage{
     private WebElement selectIndices;
     @FindBy(css = "#ember192 > div")
     private WebElement selectWallStreet;
-    @FindBy(xpath = "//*[@id=\"ember729\"]/div")
+    @FindBy(xpath = "//*[@id=\"ember668\"]")
     private WebElement selectBuy;
     @FindBy(css = "#ember711 > button")
     private WebElement placeDeal;
     @FindBy(xpath = "//*[@id=\"ember28\"]/div[2]/ul/li[13]/div")
     private WebElement countOfPositions;
-    @FindBy(xpath = "//*[@id=\"ember726\"]/div")
+    @FindBy(xpath = "//*[@id=\"ember665\"]")
     private WebElement selectSell;
 
 
