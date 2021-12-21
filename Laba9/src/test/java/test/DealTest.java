@@ -23,7 +23,7 @@ public class DealTest {
 
 
     public WebDriver getDriver() {
-                    WebDriverManager.chromedriver().setup();
+                    WebDriverManager.firefoxdriver().setup();
                     driver = new FirefoxDriver();
             driver.manage().window().maximize();
 
@@ -33,7 +33,6 @@ public class DealTest {
     public void browserSetup() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("window-size=1920,1080");
-        WebDriverManager.chromedriver().setup();
         driver = getDriver();
         String email = "Egorka002";
         String password = "30132805Egor";
