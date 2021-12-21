@@ -1,3 +1,4 @@
+
 package test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -24,6 +25,7 @@ public class DealTest {
     public void browserSetup() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("window-size=1920,1080");
+        options.addArguments("--no-sandbox");
         driver = new ChromeDriver(options);
         String email = "Egorka002";
         String password = "30132805Egor";
