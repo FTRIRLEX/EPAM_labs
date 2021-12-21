@@ -22,9 +22,9 @@ public class DealTest {
 
     @BeforeMethod
     public void browserSetup() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");
-        driver = new ChromeDriver(options);
+        //ChromeOptions options = new ChromeOptions();
+        //options.addArguments("--start-maximized");
+        driver = new ChromeDriver();
         String email = "Egorka002";
         String password = "30132805Egor";
         fxProTradingPage = new StartPage(driver)
