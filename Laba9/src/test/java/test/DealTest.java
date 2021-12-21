@@ -23,10 +23,8 @@ public class DealTest {
 
     @BeforeMethod
     public void browserSetup() {
-        System.setProperty("webdriver.chrome.driver","D:\\лабы\\3 курс\\EPAM\\EPAM_labs\\Laba9\\chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("window-size=1920,1080");
-        options.addArguments("--no-sandbox");
         driver = new ChromeDriver(options);
         String email = "Egorka002";
         String password = "30132805Egor";
