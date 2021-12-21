@@ -40,24 +40,26 @@ public class DealTest {
 
 
     @Test(description = "Buy order")
-    public void BuyAndReturnChanges() {
+    public void BuyAndReturnChanges() throws InterruptedException {
         countBeforeChanges = fxProTradingPage.getNumberOfOrders();
         fxProTradingPage.choiceIndices()
                 .choiceWallStreet()
                 .choiceBuy()
                 .confirmDeal();
+        Thread.sleep(2000);
         countAfterChanges = fxProTradingPage.getNumberOfOrders();
         Assert.assertNotEquals(countBeforeChanges, countAfterChanges);
 
     }
 
     @Test(description = "Sell order")
-    public void sellAndReturnChanges() {
+    public void sellAndReturnChanges() throws InterruptedException {
         countBeforeChanges = fxProTradingPage.getNumberOfOrders();
         fxProTradingPage.choiceIndices()
                 .choiceWallStreet()
                 .choiceSell()
                 .confirmDeal();
+        Thread.sleep(2000);
         countAfterChanges = fxProTradingPage.getNumberOfOrders();
         Assert.assertNotEquals(countBeforeChanges, countAfterChanges);
     }
