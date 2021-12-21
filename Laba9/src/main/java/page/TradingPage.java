@@ -39,7 +39,7 @@ public class TradingPage extends BasePage{
     }
 
     public TradingPage choiceBuy() {
-        waitForElementToBeClickable(driver, selectBuy);
+        waitForVisibilityOfElement(driver, selectBuy);
         selectBuy.click();
         return this;
     }
@@ -61,7 +61,7 @@ public class TradingPage extends BasePage{
     }
 
     public TradingPage choiceSell() {
-        waitForElementToBeClickable(driver, selectSell);
+        waitForVisibilityOfElement(driver, selectSell);
         selectSell.click();
         return this;
     }
