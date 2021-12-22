@@ -1,21 +1,18 @@
-import Planes.ExperimentalPlane;
+import planes.ExperimentalPlane;
 import models.ClassificationLevel;
 import models.ExperimentalTypes;
 import models.MilitaryType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import Planes.MilitaryPlane;
-import Planes.PassengerPlane;
-import Planes.Plane;
+import planes.MilitaryPlane;
+import planes.PassengerPlane;
+import planes.Plane;
 
-import java.security.PublicKey;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class AirportTest
-{
+public class AirportTest {
     private static List<Plane> planes = Arrays.asList(
             new PassengerPlane("Boeing-737", 900, 12000, 60500, 164),
             new PassengerPlane("Boeing-737-800", 940, 12300, 63870, 192),
@@ -37,96 +34,30 @@ public class AirportTest
 
     private static PassengerPlane planeWithMaxPassengerCapacity = new PassengerPlane("Boeing-747", 980, 16100, 70500, 242);
 
-    public void getTransportMilitaryPlanes(){
-        Airport airport = new Airport(planes);
-        List<MilitaryPlane> transportMilitaryPlanes = airport.getTransportMilitaryPlanes();
-        boolean TransportPlane = false;
-        for (MilitaryPlane militaryPlane : transportMilitaryPlanes)
-        {
-            if ((militaryPlane.getType() == MilitaryType.TRANSPORT))
-            {
-                TransportPlane = true;
-                break;
-            }
-        }
-        Assert.assertTrue(TransportPlane);
+
+
+    @Test
+    public void testGetPassengerPlaneWithMaxCapacity() {
+        Assert.assertTrue(planeWithMaxPassengerCapacity.equals((new Airport(planes)).getPassengerPlaneWithMaxPassengersCapacity()));
     }
 
-    public void getPassengerPlaneWithMaxCapacity(){
-        Logger logger = Logger.getLogger(Runner.class.getName());
-        logger.log(Level.INFO,"TEST testGetPassengerPlaneWithMaxCapacity started!");
-        Airport airport = new Airport(planes);
-        PassengerPlane expectedPlaneWithMaxPassengersCapacity = airport.getPassengerPlaneWithMaxPassengersCapacity();
-        Assert.assertEquals(planeWithMaxPassengerCapacity, expectedPlaneWithMaxPassengersCapacity);
-    }
-    public void sortingPlanesByMaxLoadCapacity(){
+    @Test
+    public void testGetPlanesSortedByMaxLoadCapacity() {
         Airport airport = new Airport(planes);
         airport.sortByMaxLoadCapacity();
         List<? extends Plane> planesSortedByMaxLoadCapacity = airport.getPlanes();
-        boolean nextPlaneMaxLoadCapacityIsHigherThanCurrent = true;
-        for (int i = 0; i < planesSortedByMaxLoadCapacity.size() - 1; i++) {
-            Plane currentPlane = planesSortedByMaxLoadCapacity.get(i);
-            Plane nextPlane = planesSortedByMaxLoadCapacity.get(i + 1);
-            if (currentPlane.getMinLoadCapacity() > nextPlane.getMinLoadCapacity())
-            {
-                nextPlaneMaxLoadCapacityIsHigherThanCurrent = false;
-                break;
-            }
-        }
-        Assert.assertTrue(nextPlaneMaxLoadCapacityIsHigherThanCurrent);
-    }
-    public void hasAtLeastOneBomberInMilitaryPlanes(){
-        Airport airport = new Airport(planes);
-        List<MilitaryPlane> bomberMilitaryPlanes = airport.getBomberMilitaryPlanes();
-        boolean bomberMilitaryPlane = false;
-        for (MilitaryPlane militaryPlane : bomberMilitaryPlanes)
-        {
-            if ((militaryPlane.getType() == MilitaryType.BOMBER))
-            {
-                bomberMilitaryPlane = true;
-            }
-        }
-        Assert.assertTrue(bomberMilitaryPlane);
-    }
-    public void experimentalPlanesHasClassificationLevelHigherThanUnclassified()
-    {
-        Airport airport = new Airport(planes);
-        List<ExperimentalPlane> ExperimentalPlanes = airport.getExperimentalPlanes();
-        boolean hasUnclassifiedPlanes = false;
-        for(ExperimentalPlane experimentalPlane : ExperimentalPlanes){
-            if(experimentalPlane.getClassificationLevel() == ClassificationLevel.UNCLASSIFIED){
-                hasUnclassifiedPlanes = true;
-                break;
-            }
-        }
-        Assert.assertFalse(hasUnclassifiedPlanes);
-    }
-    @Test
-    public void testGetTransportMilitaryPlanes()
-    {
-        getTransportMilitaryPlanes();
+        List<? extends Plane> expectedOrderOfPlanesSortedByMaxLoadCapacity = airport.getPlanes();
+        expectedOrderOfPlanesSortedByMaxLoadCapacity.sort(Comparator.comparing(Plane::getMaxLoadCapacity).reversed());
+        Assert.assertEquals(planesSortedByMaxLoadCapacity, expectedOrderOfPlanesSortedByMaxLoadCapacity);
     }
 
-    @Test
-    public void testGetPassengerPlaneWithMaxCapacity()
-    {
-        getPassengerPlaneWithMaxCapacity();
-    }
 
     @Test
-    public void testSortingPlanesByMaxLoadCapacity()
-    {
-        sortingPlanesByMaxLoadCapacity();
+    public void testExperimentalPlanesHasClassificationLevelHigherThanUnclassified(){
+        List<ExperimentalPlane> experimentalPlanes = (new Airport(planes)).getExperimentalPlanes();
+        Assert.assertFalse(experimentalPlanes.stream().
+                anyMatch(plane -> plane.getClassificationLevel() == ClassificationLevel.UNCLASSIFIED));
     }
 
-    @Test
-    public void testHasAtLeastOneBomberInMilitaryPlanes()
-    {
-        hasAtLeastOneBomberInMilitaryPlanes();
-    }
-    @Test
-    public void testExperimentalPlanesHasClassificationLevelHigherThanUnclassified()
-    {
-        experimentalPlanesHasClassificationLevelHigherThanUnclassified();
-    }
+
 }
